@@ -17,4 +17,14 @@ class ServeurController extends AbstractController
             'controller_name' => 'ServeurController',
         ]);
     }
+
+     /**
+     * @Route("/traitement", name="traitement")
+     */
+    public function traitement(): Response
+    {
+        return $this->render('serveur/traitement.html.twig', [
+            'controller_name' => 'ServeurController',
+        ]);
+    }
 }

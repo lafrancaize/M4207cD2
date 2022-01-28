@@ -9,12 +9,25 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Formulaire </h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/etudrt/fServerthiawD2/src/Controller/ServeurController.php'|file_link(0) }}">src/Controller/ServeurController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/etudrt/fServerthiawD2/templates/serveur/index.html.twig'|file_link(0) }}">templates/serveur/index.html.twig</a></code></li>
-    </ul>
+   <form method="post" action="traitement">
+   <p>
+   <div class="form-group">
+       <label for="Inputemail">Email :</label>
+       <input type="text" class="form-control" name="Email" id="Email" />
+       
+     <div class="form-group">  
+       <label for="Inputpass">Mot de passe :</label>
+       <input type="password" class="form-control"  name="pass" id="pass" />
+       
+   </p>
+   <button type="submit" class="btn btn-primary">Envoyer</button>
+ 
+</form>
+
+
+ 
+
 </div>
 {% endblock %}
