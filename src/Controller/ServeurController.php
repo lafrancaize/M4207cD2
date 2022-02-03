@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class ServeurController extends AbstractController
 {
@@ -21,10 +22,17 @@ class ServeurController extends AbstractController
      /**
      * @Route("/traitement", name="traitement")
      */
-    public function traitement(): Response
+    public function traitement(Request $request): Response
     {
+       //Récupère les informations de login
+       $Login=$request->request->get("pseudo");
+       $password=$request->request->get("password");
+       
         return $this->render('serveur/traitement.html.twig', [
             'controller_name' => 'ServeurController',
+            'login' => $Login,
+            'password' => $password,
         ]);
     }
+
 }
