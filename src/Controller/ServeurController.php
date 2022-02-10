@@ -7,10 +7,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Entity\NomClasseTable
+use App\Entity\Utilisateur;
 
 
-class ServeurController extends AbstractController
+
+   class ServeurController extends AbstractController
 {
     /**
      * @Route("/serveur", name="serveur")
@@ -25,41 +26,31 @@ class ServeurController extends AbstractController
      /**
      * @Route("/traitement", name="traitement")
      */
-    public function traitement(Request $request): Response
+    public function traitement(Request $request,EntityManagerInterface $manager): Response
     {
        //Récupère les informations de login
        $Login=$request->request->get("pseudo");
        $password=$request->request->get("password");
 
-       if (($Login =="root") && ($password == "toor"))
-       {
-        $txt = "valide!";
+       $response = $manager -> getRepository(Utilisateur::class)-> findOneBy([ 'Utilisateur' => 'txt']);
+       if ($response==NULL){
+           $traitement="L'utiliateur n'existe pas ";
+
+       }else{
+           $motdepasse=$response ->getPassword();
+           if ($motdepasse==$password){
+               $traitement="Mot de passe correct";
+            
+           }else {
+               $traitement="Mot de passe incorrect";
+           }
        }
-        else{
-            $txt = "Non valide!";
-        }
-       
-        return $this->render('serveur/traitement.html.twig', [
-            'controller_name' => 'ServeurController',
-            'login' => $Login,
-            'password' => $password,
-            'txt' => $txt,
-        
-
-            //Recherche de l'utilisateur dans la base de données
-            $Utilisateur = $manager -> getRepository(Utilisateur)::findOneByLoginpassword$Login$password
-
-            // vérification du mot de passe
-            if ($utilisateur == null) {
-                return new Response ("Utilisateur").$Login.$password"):
-            }
-
-           
-        ]);
-    
-
-  
+       return $this->render('serveur/traitement.html.twig',[
+           'controller_name '=>'ServerController',
+           'login' => $login,
+           'password'=>$password,
+           'traitement'=> $traitement
+       ]);
     }
-
 
 }
